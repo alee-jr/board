@@ -1,4 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
+import { GetStaticProps } from "next";
 import Head from "next/head";
 import styles from "../styles/styles.module.scss";
 export default function Home() {
@@ -27,3 +28,10 @@ export default function Home() {
     </>
   );
 }
+
+export const getStaticProps: GetStaticProps = () => {
+  return {
+    props: {},
+    revalidate: 60 * 60,
+  };
+};
