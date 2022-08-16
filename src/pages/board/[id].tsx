@@ -1,5 +1,5 @@
 import { format } from "date-fns";
-import firebase from "firebase";
+import firebase from "../../services/firebaseConnection";
 import { GetServerSideProps } from "next";
 import { getSession } from "next-auth/react";
 import Head from "next/head";
@@ -46,7 +46,7 @@ export const getServerSideProps: GetServerSideProps = async ({
 }) => {
   const { id } = params;
   const session = await getSession({ req });
-  if (!session?.id) {
+  if (!session?.vip) {
     return {
       redirect: {
         destination: "/board",
@@ -73,8 +73,19 @@ export const getServerSideProps: GetServerSideProps = async ({
         nome: snapshot.data().nome,
       };
       return JSON.stringify(data);
+    })
+    .catch(() => {
+      return {};
     });
 
+  if (Object.keys(data).length === 0) {
+    return {
+      redirect: {
+        destination: "/board",
+        permanent: false,
+      },
+    };
+  }
   return {
     props: { data },
   };

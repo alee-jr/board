@@ -1,3 +1,4 @@
+import firebase from "firebase";
 import NextAuth from "next-auth";
 import GithubProvider from "next-auth/providers/github";
 
@@ -11,14 +12,30 @@ export default NextAuth({
   callbacks: {
     async session({ session, token, user }) {
       try {
+        const lastDonate = await firebase
+          .firestore()
+          .collection("users")
+          .doc(String(token.sub))
+          .get()
+          .then((snapshot) => {
+            if (snapshot.exists) {
+              return snapshot.data().lastDonate.toDate();
+            }
+            return null;
+          });
+
         return {
           ...session,
           id: token.sub,
+          vip: lastDonate ? true : false,
+          lastDonate,
         };
       } catch (err) {
         return {
           ...session,
           id: null,
+          vip: false,
+          lastDonate: null,
         };
       }
     },
