@@ -5,7 +5,7 @@ import "../styles/global.scss";
 
 const initialOptions = {
   "client-id":
-    "AZM6GITc0YQ8AX3pWbjcu77HsRpmpUViATFGbOOSOQuQfuiPn65z2gco-8NmNMNOQNmxHUkjjHNK9Y9r",
+    "AU6BAqgqP9wXnFiCS3kxh4Yp7Bk754LRDGm7FEg0_743qQnopvisDRv2dQ-WqjFq62ZMeCh2K6PDqdMD",
   currency: "BRL",
   intent: "capture",
 };

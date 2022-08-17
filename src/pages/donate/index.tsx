@@ -6,10 +6,8 @@ import { getSession } from "next-auth/react";
 import Head from "next/head";
 import { useState } from "react";
 import styles from "./styles.module.scss";
-
-//CLIENT ID AZM6GITc0YQ8AX3pWbjcu77HsRpmpUViATFGbOOSOQuQfuiPn65z2gco-8NmNMNOQNmxHUkjjHNK9Y9r
-
-//<script src="https://www.paypal.com/sdk/js?client-id=YOUR_CLIENT_ID"></script>
+import Image from "next/image";
+import rocket from "../../../public/images/rocket.svg";
 
 interface DonateProps {
   user: {
@@ -39,10 +37,15 @@ export default function Donate({ user }: DonateProps) {
         <title>Ajude a plataforma board ficar online!</title>
       </Head>
       <main className={styles.container}>
-        <img src="/images/rocket.svg" alt="Seja Apoiador" />
+        <Image src={rocket} alt="Seja Apoiador" />
         {vip && (
           <div className={styles.vip}>
-            <img src={user.image} alt="Foto de perfil do usuário" />
+            <Image
+              width={50}
+              height={50}
+              src={user.image}
+              alt="Foto de perfil do usuário"
+            />
             <span>Parabéns você é um novo apoiador!</span>
           </div>
         )}
